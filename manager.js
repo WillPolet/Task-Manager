@@ -1,7 +1,12 @@
 const prompt = require('prompt-sync')({sigint:true});
+const fs = require('fs');
+const { finished } = require('stream');
+
+var data = fs.readFileSync("task.JSON")
+var taskTab = JSON.parse(data)
 
 let Hello = false
-let taskTab = []
+// let taskTab = []
 
 function taskManager (taskTab){
     if (Hello === false){
@@ -56,6 +61,12 @@ function taskManager (taskTab){
         break
 
         case 5 :
+            var data = JSON.stringify(taskTab/*, null, 2*/) // null and 2 are to make space into the JSON file
+            fs.writeFile('task.JSON',data, finished)
+            function finished(err){
+                console.log("all set.")
+            }
+
             return "Goodbye ! Have a nice day !"
         break
 
